@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BottleKlop", "BottleKlop\BottleKlop.pyproj", "{D72A7BF2-0B79-4865-9C03-E56A8D227B1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D72A7BF2-0B79-4865-9C03-E56A8D227B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D72A7BF2-0B79-4865-9C03-E56A8D227B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D72A7BF2-0B79-4865-9C03-E56A8D227B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D72A7BF2-0B79-4865-9C03-E56A8D227B1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8E2FAFC-D742-4588-AAC0-2D243AC35DC0}
+	EndGlobalSection
+EndGlobal
