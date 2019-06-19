@@ -2,6 +2,7 @@ import os
 import glob #file system lib
 #import tarfile
 import gc # #https://stackoverflow.com/questions/1316767/how-can-i-explicitly-free-memory-in-python
+import time
 
 import gensim 
 from gensim.models import KeyedVectors
@@ -409,15 +410,20 @@ class NtmData:#(object):
 
 
 
-    def vectors_from_url_and_paragrpahs(self, item_NtmItemReader):
+    def vectors_from_url_and_paragrpahs(self, item_NtmItemReader, dbg = None):
       item = item_NtmItemReader
       ### npDomain = []
       #print(item.url)
+
       from urllib.parse import urlparse
       # from urlparse import urlparse  # Python 2
+      
+
       parsed_uri = urlparse(item.url )
       d = parsed_uri.hostname #['{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)]
       npDomain = docs_vectorizer(numpy.array([d]), self.kvDomain, self.kvDomain.vector_size)
+
+
 
       ### npText = []
       allTextList = [] #numpy.array([])
@@ -426,7 +432,13 @@ class NtmData:#(object):
         allTextList.extend(p)#numpy.concatenate((allTextTokens,p))
         #print(p)
 
+      
+      #if 'dry' in dbg: return None, None, None
+     
       npText = docs_vectorizer(allTextList, self.kvText, self.kvText.vector_size)
+
+      if 'dry' in dbg: return None, None, None
+
 
       npCat = numpy.zeros(len(self.catDict))
       for cat in item.catList:
@@ -526,13 +538,17 @@ class NtmData:#(object):
         trainList = [] # numpy.array([])
         testList = [] #numpy.array([])
 
+        start_time = time.time()
         # i have to read directory hierarchy
         for n, fpath in enumerate(glob.glob(os.path.join(self.ntmFilesDpath, "*.xml"))):
           
           if 'fhead' in dbgLocal: 
                 if n > 100: break # prints only 3 first items
-            
           
+          print(int(time.time() - start_time))
+          start_time = time.time()
+          
+
           if 'dprint' in dbgLocal: print(":: fpath ::" + fpath)
 
 
@@ -548,7 +564,11 @@ class NtmData:#(object):
             
             if True:
               item = NtmItemReader(itemEl)
-              npDomain, npText, npCat = self.vectors_from_url_and_paragrpahs(item)
+
+              #if 'dry' in dbgLocal: continue
+              npDomain, npText, npCat = self.vectors_from_url_and_paragrpahs(item, dbgLocal)
+
+              if 'dry' in dbgLocal: continue
 
               gg = NtmItemReaderGG(itemEl)
               npGeo = self.vectors_from_gg(gg)
@@ -590,7 +610,9 @@ class NtmData:#(object):
                   npCat = npCat + self.catDict[cat.lower()]
                 else:
                   print("missing in catDict:" + cat)
+            
 
+            if 'dry' in dbgLocal: continue
             trainList.append([npText, npDomain, npGeo, npCat, gg.st2_index])
 
 

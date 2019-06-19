@@ -389,16 +389,23 @@ from mxnet import nd
 #for doc i will return a normalized vector (https://stackoverflow.com/questions/30795944/how-can-a-sentence-or-a-document-be-converted-to-a-vector)
 def docs_vectorizer(doc, model, size):
     #size = model.vector_size
-    doc_vec = np.zeros(size) # 400 ?-yyy should it be precizely the model 'size=150?'
+    doc_vec = np.zeros(size, dtype = np.float32) # 400 ?-yyy should it be precizely the model 'size=150?'
+    #return doc_vec
     numw = 0
     for w in doc:
         try:
+            #x = model[w]
+            #continue
             doc_vec = np.add(doc_vec, model[w])
             numw+=1
         except:
             pass
+    return 0
+    #x = np.sqrt(np.dot(doc_vec, doc_vec.T))
+    #return doc_vec / x
+    #return doc_vec / np.sqrt(np.dot(doc_vec, doc_vec.T))
     return doc_vec / np.sqrt(doc_vec.dot(doc_vec))
-
+    
 
 def My_n_grams(str, n = None):
   grams_1 = gensim.utils.simple_preprocess(str) #somehow and simingly strips html tags like <p> .. </p> off

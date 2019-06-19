@@ -568,7 +568,7 @@ what='real'
 #what='exp2'
 #what='exp3'
 #what = 'minisom'
-what = 'st2'
+#what = 'st2'
 
 
 
@@ -963,7 +963,8 @@ elif what=='real':
     dbgSet = set(['dprint','fheadXXX']) 
     #ntmData2.
     if what == 'testwrite':
-      dbgSet = set([  'dprint','fheadXXX']) 
+      dbgSet = set([  'dprint','fheadXXX'])
+      dbgSet.add('dry')
       ntmData.testWrite(dbgSet)
     else:
       ntmData.testWrite_Nocls(dbgSet)

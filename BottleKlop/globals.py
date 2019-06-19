@@ -1,6 +1,8 @@
 #import mlp_scratch_class2 as MC
 import sys
 sys.path.insert(0, './ml')
+
+#import time
 from NtmData2 import *
 #from configs import *  # just my file ...
     
